@@ -100,6 +100,22 @@ type TupleColors = Extract<Colors, [number, number, number]>; // [number, number
 type NonStringColors = Exclude<Colors, string>; // { r: number; g: number; b: number } | [number, number, number]
 ```
 
+## Infer
+
+In this example ConstructorArgs is able to get the type of the first argument of a newable object ( which is the constructor ).
+In this case I'm using the Date class, so dateValue can only be `number | string | Date`
+
+```
+type ConstructorArgs<T> = T extends {
+  new (constructor: infer A, ...args: any[]): any;
+}
+  ? A
+  : never;
+
+const dateValue: ConstructorArgs<typeof Date> = true; // Typescript Error
+const dateValue2: ConstructorArgs<typeof Date> = '14/10/1993'; // OK
+```
+
 # React
 
 React with Brian Holt
