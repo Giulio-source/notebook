@@ -1,4 +1,5 @@
 # Typescript
+  https://www.typescript-training.com/
 
 ## Function overload
 
@@ -117,8 +118,7 @@ const dateValue2: ConstructorArgs<typeof Date> = '14/10/1993'; // OK
 ```
 
 # React
-
-React with Brian Holt
+https://react-v8.holt.courses/
 
 ## Setup
 
