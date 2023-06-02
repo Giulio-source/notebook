@@ -164,6 +164,52 @@ function showFruitRecord(fruits: FruitRecord) {
 }
 ```
 
+## Template literal
+
+```
+type FunctionPrefix = "is" | "get" | "set";
+type Values = "height" | "width";
+
+type FunctionValues = `${FunctionPrefix}${Capitalize<Values>}`;
+// "isHeight" | "isWidth" | "getHeight" | "getWidth" | "setHeight" | "setWidth"
+```
+
+## Key mapping
+
+```
+type ApiResponse = {
+  stores: string;
+  userPreferences: {
+    mobile: boolean;
+    theme: "dark" | "light";
+  };
+  id: number;
+};
+
+// Using keyword `as` for renaming (remapping) the keys
+type ApiSDK = {
+  [K in keyof ApiResponse as `set${Capitalize<K>}`]: (
+    arg: ApiResponse[K]
+  ) => void;
+};
+
+// MAGIC HAPPENS ❤️
+// type ApiSDK = {
+//     setStores: (arg: string) => void;
+//     setUserPreferences: (arg: {
+//         mobile: boolean;
+//         theme: "dark" | "light";
+//     }) => void;
+//     setId: (arg: number) => void;
+// }
+
+function load(apiSdk: ApiSDK) {
+  apiSdk.setId(4);
+  apiSdk.setStores("milano");
+  apiSdk.setUserPreferences({ mobile: false, theme: "dark" });
+}
+```
+
 # React
 https://react-v8.holt.courses/
 
