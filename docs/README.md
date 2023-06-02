@@ -117,6 +117,53 @@ const dateValue: ConstructorArgs<typeof Date> = true; // Typescript Error
 const dateValue2: ConstructorArgs<typeof Date> = '14/10/1993'; // OK
 ```
 
+## Indexed Access Types
+
+```
+type Person = {
+    name: string
+    surname: string
+    age: number
+    favorites: {
+        food: string
+        series: string
+    }
+}
+
+const favorites: Person['favorites'] = {
+    food: 'pizza',
+    series: 'black mirror'
+}
+```
+
+## Mapped Types
+
+Dictionary: As general as it gets, can have any key of type string
+
+```
+type Dictionary = {
+  [key: string]: any;
+};
+
+function showDictionary(dictionary: Dictionary) {
+  const item = dictionary.mango; // Typescript does not see this as an error
+}
+```
+
+Record: Set of keys, more specific than dictionary
+
+```
+type FruitRecord = {
+  [FruitKey in "apple" | "orange"]: any;
+  // [key: "apple" | "orange"]: any; WRONG SYNTAX! DO NOT USE!
+};
+
+function showFruitRecord(fruits: FruitRecord) {
+  const item = fruits.mango; // Typescript shows error cause it knows only apple and orange keys are allowed
+  const item2 = fruits.apple; // Typescript is happy
+}
+```
+
 # React
 https://react-v8.holt.courses/
 
