@@ -22,16 +22,16 @@ add("stringa", "345");
 function onClick(this: HTMLButtonElement, event: Event) {
   this.disabled = true;
 }
+```
 
+## is
+```
 type CarLike = {
   model: string;
   year: number;
   make: string;
 };
-```
 
-## is
-```
 function isCarLike(value: any): value is CarLike {
   return (
     "model" in value &&
