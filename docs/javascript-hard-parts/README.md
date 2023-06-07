@@ -9,3 +9,22 @@
 - DRY principle: DON'T REPEAT YOURSELF
 - Higher Order Functions: Functions that take callbacks or return functions
 - Function stored as property of an object: `method`
+
+## Closures
+
+- The local memory (aka `variable environment` / `state`) of a function is fresh everytime
+
+```function outer() {
+    let counter = 0;
+    function increment() { counter ++; console.log('--->', counter) };
+    return increment;
+    }
+
+    const returnIncrement = outer();
+
+    returnIncrement() // "---> 1"
+    returnIncrement() // "---> 2"
+```
+- When `increment` is returned from `outer`, it also gets a hidden, inaccessible property of scope `[[scope]]` which is a permanent state of live data
+- We cannot access the `counter` property stored inside `returnIncrement`, ❌ `returnIncrement.[[scope]].counter ❌ `returnIncrement.counter
+- It's only accessible by the function itself
