@@ -25,6 +25,6 @@
     returnIncrement() // "---> 1"
     returnIncrement() // "---> 2"
 ```
-- When `increment` is returned from `outer`, it also gets a hidden, inaccessible property of scope `[[scope]]` which is a permanent state of live data
+- When `increment` is returned from `outer`, it also gets a hidden, inaccessible property of scope `[[scope]]` which is a permanent state of live data ( "backpack" / "closure" / "Closed Over Variable Environment COVE" / "Persistent Lexical/Static Scope Referenced Data PLSRD")
 - We cannot access the `counter` property stored inside `returnIncrement` - ❌ `returnIncrement.[[scope]].counter` - ❌ `returnIncrement.counter`
 - It's only accessible by the function itself
