@@ -12,6 +12,8 @@
 
 ## Closures
 
+Exercises: http://csbin.io/closures
+
 - The local memory (aka `variable environment` / `state`) of a function is fresh everytime
 
 ```function outer() {
