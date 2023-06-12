@@ -33,6 +33,8 @@ Exercises: http://csbin.io/closures
 
 ## Asynchronous JS
 
+Exercises: http://csbin.io/async
+
 Javascript is:
 - Single threaded ( one command at a time )
 - Synchronously executed ( each line is run in order )
