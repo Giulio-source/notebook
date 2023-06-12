@@ -70,3 +70,7 @@ The browser has got many more features that expands what we can do with javascri
     Me first!
     Hello
 ```
+
+- Promises go to a different queue, the `Microtask Queue`
+- First all the global code is run, then the microtask queue takes priority and finally the callback queue
+- `Global code` > `Microtask queue` > `Callback queue`
