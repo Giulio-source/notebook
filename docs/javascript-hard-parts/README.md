@@ -74,3 +74,31 @@ The browser has got many more features that expands what we can do with javascri
 - Promises go to a different queue, the `Microtask Queue`
 - First all the global code is run, then the microtask queue takes priority and finally the callback queue
 - `Global code` > `Microtask queue` > `Callback queue`
+
+## Class & Prototypes
+
+- Prototype chain: Every object has got a `__proto__` property which defaults to `Object.prototype`
+- `Object.prototype` also has a `__proto__` property which is `null`
+- When trying to access a property on an object, first we check its own properties and then we start going down the prototype chain
+- `this` defaults to the global object ( `window` )
+- It's better not to use arrow functions on methods of objects ( if we have to use `this` ), because with arrow functions `this` is NOT assigned the value of the object it's called from, but it instead is assigned the value of this of were it was declared
+
+```
+function userCreator(name, score) {
+   const newUser = Object.create(userFunctionStore);
+   newUser.name = name;
+   newUser.score = score;
+   return newUser;
+};
+const userFunctionStore = {
+   increment: function() {
+        const add1 = () => { this.score++; } // this is the this of increment, which is user1   
+        add1() 
+    }
+};
+const user1 = userCreator("Will", 3);
+const user2 = userCreator("Tim", 5);
+user1.increment(); // this is user1
+```
+
+- To specify what `this` is, we can manually call the function with `call` or `apply`
