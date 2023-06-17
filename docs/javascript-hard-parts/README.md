@@ -103,7 +103,7 @@ user1.increment(); // this is user1
 
 - To specify what `this` is, we can manually call the function with `call` or `apply`^
 
-### `new` Keyword
+### `new` keyword
 
 ```
 function userCreator(name, score){
@@ -121,3 +121,20 @@ user1.increment()
 3. `new` returns the `this` object
 
 - `new` is therefore just a shortcut to what we did earlier with `Object.create()`
+
+### `class` keyword
+
+- `class` is just a shortcut that allows us to write on the prototype object all in one place
+
+```
+class UserCreator {
+  constructor (name, score){
+    this.name = name;
+    this.score = score;
+  }
+  increment (){ this.score++; }
+  login (){ console.log("login"); }
+}
+const user1 = new UserCreator("Eva", 9);
+user1.increment();
+```
