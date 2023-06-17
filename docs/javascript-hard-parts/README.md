@@ -101,4 +101,23 @@ const user2 = userCreator("Tim", 5);
 user1.increment(); // this is user1
 ```
 
-- To specify what `this` is, we can manually call the function with `call` or `apply`
+- To specify what `this` is, we can manually call the function with `call` or `apply`^
+
+### `new` Keyword
+
+```
+function userCreator(name, score){
+  this.name = name;
+  this.score = score;
+}
+userCreator.prototype.increment = function(){ this.score++; };
+userCreator.prototype.login = function(){ console.log("login"); };
+const user1 = new userCreator(“Eva”, 9)
+user1.increment()
+```
+
+1. `new` declares an empty object with the label of `this`, the function `userCreator` then assigns the property names and values to it
+2. `new` assigns the `__proto__` property to `this` object with the value of `userCreator.prototype`
+3. `new` returns the `this` object
+
+- `new` is therefore just a shortcut to what we did earlier with `Object.create()`
