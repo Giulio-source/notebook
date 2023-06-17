@@ -16,10 +16,11 @@ Exercises: http://csbin.io/closures
 
 - The local memory (aka `variable environment` / `state`) of a function is fresh everytime
 
-```function outer() {
-    let counter = 0;
-    function increment() { counter ++; console.log('--->', counter) };
-    return increment;
+```
+    function outer() {
+        let counter = 0;
+        function increment() { counter ++; console.log('--->', counter) };
+        return increment;
     }
 
     const returnIncrement = outer();
@@ -101,7 +102,7 @@ const user2 = userCreator("Tim", 5);
 user1.increment(); // this is user1
 ```
 
-- To specify what `this` is, we can manually call the function with `call` or `apply`^
+- To specify what `this` is, we can manually call the function with `call` or `apply`
 
 ### `new` keyword
 
