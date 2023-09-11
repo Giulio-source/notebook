@@ -13,3 +13,9 @@
 - It's also a good idea to **turn Simulated throttling on**, as the device devs work on is usually better than average
 - Remember to keep **Chrome in the foreground** when doing a report!
 - Also remember to do the report in an **incognito window**!
+
+## Tips for improving metrics
+
+- Use CDN
+- gzip files
+- 
