@@ -1,15 +1,17 @@
 # Vue 3
 https://github.com/bencodezen/complete-intro-to-vue-3-workshop
 
+---
+
 ## Props
 
-### Passing props:
+### Passing props
 
 ```html
 <Character v-for="character in characterList" :name="character.name" @click="favoriteCharacter(character)" />
  ```
 
- ### Receiving props:
+ ### Receiving props
 
 ```html
 <script>
@@ -34,3 +36,5 @@ export default {
     </li>
 </template>
  ```
+
+ ---
