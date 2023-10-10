@@ -102,3 +102,81 @@ export default {
     // {...}
 </template>
 ```
+
+---
+
+## Slots
+
+Slots are a little bit like children in React. Here's a small example of a Button component that can accept children and has a default value of "Click me":
+
+```html
+<template>
+    <button><slot>Click me</slot></button>
+</template>
+```
+
+The label click me can then be overrided when Button is used, like so:
+
+```html
+<Button>Hello World</Button>
+```
+
+We can also use named slots to make layouts components, here's an example:
+
+```html
+<template>
+    <div class="base-layout">
+        <header>
+            <slot name="header"></slot>
+        </header>
+        <main>
+            <slot name="main"></slot>
+        </main>
+        <aside>
+            <slot name="aside"></slot>
+        </aside>
+        <footer>
+            <slot name="footer"></slot>
+        </footer>
+    </div>
+</template>
+
+<style>
+.base-layout {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 600px 200px;
+    grid-template-rows: 100px 400px 100px;
+    grid-template-areas:
+        "header header"
+        "main aside"
+        "footer footer";
+}
+header {
+    grid-area: header;
+    background: teal;
+}
+main {
+    grid-area: main;
+    background: tomato;
+}
+aside {
+    grid-area: aside;
+    background: dodgerblue;
+}
+footer {
+    grid-area: footer;
+    background: pink;
+}
+</style>
+```
+
+We can then place the content inside the layout named slots like so:
+```html
+  <Layout>
+    <template v-slot:header>Header</template>
+    <template v-slot:main>Main</template>
+    <template v-slot:aside>Aside</template>
+    <template #footer>Footer</template> // # is a shortcut for v-slot:
+  </Layout>
+  ```
