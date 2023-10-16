@@ -180,3 +180,62 @@ We can then place the content inside the layout named slots like so:
     <template #footer>Footer</template> // # is a shortcut for v-slot:
   </Layout>
   ```
+
+## Generic Component
+
+We can use the component tag to assign a custom component. Example:
+
+```html
+<script>
+[...]
+export default {
+  components: {
+    HomePage,
+    LoginPage,
+    UsersPage
+  },
+  [...],
+  methods: {
+    showHomePage() {
+      this.currentPage = "Home";
+    },
+    showLoginPage() {
+      this.currentPage = "Login";
+    },
+    showUserPage() {
+      this.currentPage = "Users";
+    },
+  },
+};
+</script>
+
+<template>
+  [...]
+  <component :is="renderPage" />
+</template>
+```
+
+## Lifecycle Hooks
+
+Just like in React, Vue has got some lifecycled that we can use to run javascript at specific moments during the life cycle of a component.
+
+https://vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram
+
+To tap into them, we can just use the call the function named as the label in the diagram. Example with the `computed` property:
+
+```html
+<script>
+export default {
+  components: {...},
+  data: () => ({
+    currentPage: "Home",
+  }),
+  computed: {
+    renderPage() {
+      return this.currentPage + 'Page'
+    }
+  },
+  methods: {...},
+};
+</script>
+```
