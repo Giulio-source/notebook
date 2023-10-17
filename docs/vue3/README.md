@@ -239,3 +239,121 @@ export default {
 };
 </script>
 ```
+
+## Composition API
+
+The Composition API was introduced with Vue3.
+
+### Setup
+
+To use the Composition API we can simply add `setup` to the script tag.
+
+```html
+<script setup>
+  // Composition API Code
+</script>
+```
+
+### Ref
+
+Ref is a little bit like useState in React, it's a way to declare a piece of reactive data and let Vue handle everything when it changes. To use it we simply import it from the vue library and then call it with `ref()`. To access or manipulate its value we have to get the `.value` property on it. ( A little bit like `ref.current` in React )
+
+```html
+<script setup>
+  import { ref } from 'vue'
+  const count = ref(0)
+
+  function increment() {
+    count.value++
+  }
+</script>
+```
+
+### defineProps and defineEmits
+
+These two functions are global in the Composition API, we don't need to import them like `ref`.
+
+```html
+<script setup>
+  const props = defineProps({
+    suffix: {
+      type: String,
+    }
+  })
+
+  const emit = defineEmits(['done'])
+
+  emit('done', { status: true });
+</script>
+
+<template>
+  <main>
+    <h1>Users {{ suffix }}</h1>
+  </main>
+</template>
+
+```
+
+### Composables
+
+These are the equivalent of custom hook in react. It's a way of storing data in a module and being able to consume it in different places. As a standard these javascript files are all put inside a folder `/composables`.
+
+Example `/src/composables/useCount.js`:
+
+```js
+import { ref } from "vue";
+
+const globalCount = ref(0);
+
+export const useCount = () => {
+  const localCount = ref(0);
+
+  function increment() {
+    localCount.value++;
+  }
+
+  function decrement() {
+    localCount.value -= 1;
+  }
+
+  function incrementGlobal() {
+    globalCount.value++;
+  }
+
+  function decrementGlobal() {
+    globalCount.value -= 1;
+  }
+
+  return {
+    localCount,
+    globalCount,
+    increment,
+    decrement,
+    incrementGlobal,
+    decrementGlobal,
+  };
+};
+```
+
+After we declare the hook, we can use it in any place in our app:
+
+```html
+<script setup>
+import { useCount } from "../composables/useCount";
+
+const { incrementGlobal } = useCount()
+
+defineProps({
+  user: {
+    type: Object,
+    required: true,
+  }
+})
+</script>
+
+<template>
+  <li class="user-card">{{ user.name }}: {{ user.website }}
+    <button @click="incrementGlobal">+</button>
+  </li>
+</template>
+```
