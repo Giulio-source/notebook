@@ -365,6 +365,10 @@ Similarly to React, Vue also has a library to deal with routing: https://router.
 We need to setup the router before mounting the app:
 
 ```js
+  // Please note that usually files for pages are put inside a views folder
+  import HomePage from "./views/HomePage.vue";
+  import LoginPage from "./views/LoginPage.vue";
+  import UserPage from "./views/UsersPage.vue";
   const router = createRouter({
     history: createWebHashHistory(),
     routes: [
@@ -452,4 +456,72 @@ const data = await fetch(`https://jsonplaceholder.typicode.com/users/${params.id
         <pre>{{ data }}</pre>
     </main>
 </template>
-```Ø
+```
+
+## Pinia for state management
+
+Pinia is a library for state management, just like what Redux is ( was ☠️ ) for React.
+
+Just like vue-router, this needs to be setup before mounting the app:
+
+```js
+import { createPinia } from "pinia";
+import App from "./App.vue";
+
+const pinia = createPinia();
+
+createApp(App).use(pinia).mount("#app");
+```
+
+Then inside a folder named `stores` ( conventional naming ) we can declare custom hooks that defines slices of store using `defineStore`, this takes two parameters, first one is the key, second one is an options object with three keys: `state`, `getters` and `actions`:
+
+```js
+import { defineStore } from "pinia";
+
+export const useUsersStore = defineStore("UsersStore", {
+  // Data
+  state: () => ({
+    users: [],
+  }),
+  // Computed properties to get pieces of state
+  getters: {
+    getUserById: (state) => {
+      return (id) => state.users.find((user) => user.id == id);
+    },
+    getShortUserList: (state) => state.users.splice(0, 4),
+  },
+  // Methods to modify state
+  actions: {
+    fetchUsers() {
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((response) => response.json())
+        .then((res) => {
+          this.users = res;
+        });
+    },
+  },
+});
+```
+
+When can then use the hook inside a custom component: 
+N.B. Best to avoid destructuring things, it fucks things up with Vue.
+
+```html
+<script setup>
+import { useRoute } from 'vue-router';
+import { useUsersStore } from '../stores/UsersStore';
+
+const { params } = useRoute()
+const store = useUsersStore()
+
+const data = store.getUserById(params.id)
+</script>
+
+<template>
+    <main>
+        <h1>User {{ params.id }}</h1>
+        <pre>{{ store.getUserById(params.id) }}</pre>
+    </main>
+</template>
+```
+
