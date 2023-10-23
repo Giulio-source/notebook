@@ -460,7 +460,7 @@ const data = await fetch(`https://jsonplaceholder.typicode.com/users/${params.id
 
 ## Pinia for state management
 
-Pinia is a library for state management, just like what Redux is ( was ☠️ ) for React.
+Pinia is a library for state management, just like what Redux is ( was ☠️ ) for React. https://pinia.vuejs.org/
 
 Just like vue-router, this needs to be setup before mounting the app:
 
@@ -525,3 +525,7 @@ const data = store.getUserById(params.id)
 </template>
 ```
 
+## Useful libraries
+
+VueUse: Library of util functions - https://vueuse.org/ 
+TransitionGroup Component: https://vuejs.org/guide/built-ins/transition-group.html#transitiongroup
