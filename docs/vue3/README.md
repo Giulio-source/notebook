@@ -357,3 +357,99 @@ defineProps({
   </li>
 </template>
 ```
+
+## Routing
+
+Similarly to React, Vue also has a library to deal with routing: https://router.vuejs.org/
+
+We need to setup the router before mounting the app:
+
+```js
+  const router = createRouter({
+    history: createWebHashHistory(),
+    routes: [
+      {
+        path: "/",
+        component: HomePage,
+      },
+      {
+        path: "/login",
+        component: LoginPage,
+      },
+      {
+        path: "/users",
+        component: UserPage,
+      },
+      {
+        path: "/dashboard",
+        component: () => import("./views/DashboardPage.vue"),
+      },
+      {
+        path: "/user/:id",
+        component: () => import("./views/UserPage.vue"),
+      },
+    ],
+  });
+
+  createApp(App).use(router).mount("#app");
+```
+
+In the App component we can then use `RouterView` to display the content and `RouterLink` to navigate to other pages:
+
+```html
+  <template>
+    <header class="header">
+      <span class="logo">
+        <img src="@/assets/vue-heart.png" width="30" />C'est La Vue
+      </span>
+      <nav class="nav">
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/users">Users</RouterLink>
+      </nav>
+    </header>
+    <Suspense>
+      <RouterView />
+      <template v-slot:fallback>Loading...</template>
+    </Suspense>
+  </template>
+```
+
+### Programmatic navigation
+
+We can use the `useRouter` hook to navigate to other pages with JS:
+
+```js
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter()
+  
+  function onClick() {
+    router.push('/dashboard')
+  }
+```
+
+### Dynamic routing
+
+We can use params such as `:id` when setting up the router to navigate to dynamic routes. 
+
+We can then use the hook `useRoute` to read these params from the page with the dynamic route:
+
+```html
+<script setup>
+import { useRoute } from 'vue-router';
+
+
+const { params } = useRoute()
+
+const data = await fetch(`https://jsonplaceholder.typicode.com/users/${params.id}`).then(res => res.json())
+
+</script>
+
+<template>
+    <main>
+        <h1>User {{ params.id }}</h1>
+        <pre>{{ data }}</pre>
+    </main>
+</template>
+```Ø
