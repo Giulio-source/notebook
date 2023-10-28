@@ -529,3 +529,26 @@ const data = store.getUserById(params.id)
 
 VueUse: Library of util functions - https://vueuse.org/ 
 TransitionGroup Component: https://vuejs.org/guide/built-ins/transition-group.html#transitiongroup
+
+## Best practices
+
+### Naming conventions:
+
+Avoid single worded names: Header, Button, Container
+
+Instead prefix them with `App`, `Base` or `The`: `TheHeader`, `BaseButton`, `AppContainer`
+
+Name methods something meaningful:  
+❌ `onInput`
+✅ `updateUsername`
+
+Prefer destructuring over multiple arguments:
+❌ `updateUsername(userList, index, isActive, isFocused) {`
+✅ `updateUsername({ userList, index, isActive, isFocused }) {`
+
+### Refactoring
+
+You might need refactor when:
+- The components are hard to understand
+- You feel a part of the component should have its own state
+- It's difficult to say what the component does exactly
