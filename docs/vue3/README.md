@@ -532,18 +532,18 @@ TransitionGroup Component: https://vuejs.org/guide/built-ins/transition-group.ht
 
 ## Best practices
 
-### Naming conventions:
+### Naming conventions
 
 Avoid single worded names: Header, Button, Container
 
 Instead prefix them with `App`, `Base` or `The`: `TheHeader`, `BaseButton`, `AppContainer`
 
 Name methods something meaningful:  
-❌ `onInput`
+❌ `onInput`  
 ✅ `updateUsername`
 
-Prefer destructuring over multiple arguments:
-❌ `updateUsername(userList, index, isActive, isFocused) {`
+Prefer destructuring over multiple arguments:  
+❌ `updateUsername(userList, index, isActive, isFocused) {`  
 ✅ `updateUsername({ userList, index, isActive, isFocused }) {`
 
 ### Refactoring
