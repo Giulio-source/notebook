@@ -181,6 +181,68 @@ We can then place the content inside the layout named slots like so:
   </Layout>
   ```
 
+### PropSlots and modeling slot to parent
+
+We can pass a `_field_` to the slot and then inside the slot we emit `update:_field_`, in this case we have `itemList` passed down and `update:itemList` emitted with some data.
+
+```html
+<script setup>
+  const props = defineProps({
+    itemList: {
+      type: Array,
+      default: () => []
+    },
+    itemType: {
+      type: String,
+      required: true
+    }
+  })
+
+  const emit = defineEmits(['update:itemList'])
+
+  function fetchItemList() {
+    fetch(`https://jsonplaceholder.typicode.com/${props.itemType}`)
+      .then(response => response.json())
+      .then(json => {
+        emit('update:itemList', json)
+      })
+  }
+</script>
+
+<template>
+  <!-- Generic Template -->
+  <div class="section">
+    <button @click="fetchItemList">Fetch Data</button>
+    <ul class="list">
+      <slot name="items" :itemList="itemList"/>
+    </ul>
+  </div>
+</template>
+```
+
+In the parent component we can then declare some reactive data with `ref()` and bind it the slot with v-model:
+
+```html
+<script setup>
+  const photoGallery = ref([])
+</script>
+
+<template>
+  <BaseDisplay
+    itemType="photos"
+    v-model:itemList="photoGallery"
+  >
+    <template v-slot:items>
+      <li v-for="photo in photoGallery" :key="`photo-id-${photo.id}`">
+        <img :src="photo.thumbnailUrl" />
+      </li>
+    </template>
+  </BaseDisplay>
+</template>
+```
+
+
+
 ## Generic Component
 
 We can use the component tag to assign a custom component. Example:
