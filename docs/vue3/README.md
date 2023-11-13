@@ -181,7 +181,66 @@ We can then place the content inside the layout named slots like so:
   </Layout>
   ```
 
-### PropSlots and modeling slot to parent
+### Prop slots
+
+We can pass data from the slot up to the parent:
+
+```html
+<script setup>
+const todoList = ref([])
+
+const completedItems = computed(() => {
+  return todoList.value.filter(item => item.completed)
+})
+
+const remainingItems = computed(() => {
+  return todoList.value.filter(item => !item.completed)
+})
+
+function fetchTodoList() {
+  fetch('https://jsonplaceholder.typicode.com/todos/')
+    .then(response => response.json())
+    .then(json => {
+      todoList.value = json
+    })
+}
+</script>
+
+<template>
+  <div class="section">
+    <slot name="hero" />
+    <button @click="fetchTodoList">Fetch Data</button>
+    <!-- 👇🏼 This is where we pass data ( :completed, :remaining ) up to the parent -->
+    <slot
+      name="metrics"
+      :completed="completedItems"
+      :remaining="remainingItems"
+    >
+      <p>
+        {{ completedItems.length }} completed |
+        {{ remainingItems.length }} remaining
+      </p>
+    </slot>
+ 
+  </div>
+</template>
+```
+
+We can then use the data in the parent like this:
+
+```html
+<template>
+  <TodoViewer title="This is fun!">
+    <template #metrics="propsSlots">
+      <h1>Completed: {{ propsSlots.completed.length }}</h1>
+      <h2>Remaining: {{ propsSlots.remaining.length }}</h2>
+    </template>
+  </TodoViewer>
+</template>
+```
+
+
+### Modeling slot to parent
 
 We can pass a `_field_` to the slot and then inside the slot we emit `update:_field_`, in this case we have `itemList` passed down and `update:itemList` emitted with some data.
 
@@ -214,7 +273,7 @@ We can pass a `_field_` to the slot and then inside the slot we emit `update:_fi
   <div class="section">
     <button @click="fetchItemList">Fetch Data</button>
     <ul class="list">
-      <slot name="items" :itemList="itemList"/>
+      <slot name="items" />
     </ul>
   </div>
 </template>
