@@ -677,5 +677,7 @@ You might need refactor when:
 # Nuxt 3
 
 `NuxtPage`: to show the page content ( can be used to render parts of a page too )
+
 `NuxtLink`: to link to other pages
+
 `useRoute`: to get route info `const route = useRoute()`
