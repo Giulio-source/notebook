@@ -673,3 +673,9 @@ You might need refactor when:
 - The components are hard to understand
 - You feel a part of the component should have its own state
 - It's difficult to say what the component does exactly
+
+# Nuxt 3
+
+`NuxtPage`: to show the page content ( can be used to render parts of a page too )
+`NuxtLink`: to link to other pages
+`useRoute`: to get route info `const route = useRoute()`
