@@ -681,3 +681,27 @@ You might need refactor when:
 `NuxtLink`: to link to other pages
 
 `useRoute`: to get route info `const route = useRoute()`
+
+`NuxtLayout`: to use layouts inside layout dir
+
+Definition `layouts/breadcrumb.vue`:
+```html
+<script lang="ts" setup></script>
+<template>
+  <div>
+    <p>This is the Breadcrumb</p>
+    <slot />
+  </div>
+</template>
+```
+
+Usage `pages/index.vue`:
+```html
+<script lang="ts" setup></script>
+<template>
+ <NuxtLayout name="breadcrumb">
+   <p>This is the content of page 2</p>
+   <NuxtLink to="/">Go back to index</NuxtLink>
+ </NuxtLayout>
+</template>
+```
