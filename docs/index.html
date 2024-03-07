@@ -13,6 +13,20 @@
       rel="stylesheet"
       href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
     />
+    <style>
+      section.cover .cover-main > p:has(a) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      section.cover .cover-main > p:last-child a {
+        background: #34495e !important;
+        border-color: #34495e !important;
+        color: white !important;
+      }
+    </style>
   </head>
   <body>
     <nav>
@@ -21,6 +35,8 @@
       <a href="#/javascript-hard-parts/">Javascript Hard Parts</a>
       <a href="#/web-performance/">Web Performance</a>
       <a href="#/vue3/">Vue 3</a>
+      <a href="#/nextjs/">NextJS</a>
+      <a href="#/algorithms/">Algorithms</a>
     </nav>
     <div id="app"></div>
     <script>

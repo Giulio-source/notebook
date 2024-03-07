@@ -8,4 +8,5 @@
 [Web Performance](https://giulio-source.github.io/notebook/#/web-performance/)
 [Vue 3](https://giulio-source.github.io/notebook/#/vue3/)
 [NextJS](https://giulio-source.github.io/notebook/#/nextjs/)
+[Algorithms](https://giulio-source.github.io/notebook/#/algorithms/)
 
