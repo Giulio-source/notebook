@@ -1,6 +1,6 @@
 # Linear Search
 
-## Complexity: O(N)
+**Complexity: O(N)** 
 
 Loop through an array from the linearly from start to end
 
@@ -28,7 +28,7 @@ export default function linear_search(
 
 # Binary Search
 
-## Complexity: O(logN)
+**Complexity: O(logN)**
 
 ⚠️ This only works on ordered arrays ⚠️
 
@@ -57,5 +57,43 @@ export default function bs_list(arr: number[], target: number): boolean {
     }
 
     return false; // If the target is not found, return false.
+}
+```
+
+# Bubble sort
+
+**Complexity: O(N^2)**
+
+```js
+/**
+ * Bubble sort an array of numbers.
+ *
+ * @param arr The array to sort.
+ */
+export default function bubble_sort(arr: number[]): void {
+    // The index of the last unsorted element in the array.
+    let unsortedUntilIndex = arr.length - 1;
+    // A flag indicating whether the array is sorted or not.
+    let isSorted = false;
+
+    // While the array is not sorted...
+    while (isSorted === false) {
+        // Reset the sorted flag.
+        isSorted = true;
+        // Loop through all unsorted elements in the array...
+        for (let i = 0; i < unsortedUntilIndex; i++) {
+            // If the current element is greater than the next element...
+            if (arr[i] > arr[i + 1]) {
+                // The array is not sorted.
+                isSorted = false;
+                // Swap the current element with the next element.
+                const temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+        // Decrease the index of the last unsorted element.
+        unsortedUntilIndex--;
+    }
 }
 ```
